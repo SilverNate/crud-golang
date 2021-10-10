@@ -247,17 +247,17 @@ func TestUpdateUser(t *testing.T) {
 			errorMessage: "Unauthorized",
 		},
 		{
-			// Remember "kenny@gmail.com" belongs to user 2
+			// Remember "melati@gmail.com" belongs to user 2
 			id:           strconv.Itoa(int(AuthID)),
-			updateJSON:   `{"address":"Jl.Melati", "email": "melati@gmail.com", "password": "password"}`,
+			updateJSON:   `{"address":"Jl.Melati", "email": "testing@gmail.com", "password": "password"}`,
 			statusCode:   500,
 			tokenGiven:   tokenString,
 			errorMessage: "Email Already Taken",
 		},
 		{
-			// Remember "Kenny Morris" belongs to user 2
+			// Remember "pondokgede" belongs to user 2
 			id:           strconv.Itoa(int(AuthID)),
-			updateJSON:   `{"address":"Jl.pondokgede",, "email": "tryout@gmail.com", "password": "password"}`,
+			updateJSON:   `{"address":"Jl.Sukma",, "email": "tryout@gmail.com", "password": "password"}`,
 			statusCode:   500,
 			tokenGiven:   tokenString,
 			errorMessage: "Address Already Taken",
@@ -299,6 +299,8 @@ func TestUpdateUser(t *testing.T) {
 	}
 
 	for _, v := range samples {
+
+		fmt.Println("samples => ", v.updateJSON)
 
 		req, err := http.NewRequest("POST", "/users", bytes.NewBufferString(v.updateJSON))
 
